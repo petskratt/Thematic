@@ -4,7 +4,7 @@
  *
  * @package ThematicLegacy
  */
- 
+
 /**
  * Function for handling the bloginfo / get_bloginfo data using our own 'cache'.
  *
@@ -28,7 +28,7 @@ function thm_bloginfo($command = '', $echo = FALSE) {
 /**
  * Function for testing, if a sidebar has registered widgets.
  *
- * We removed the functionality because WordPress own function is_active_sidebar() is 
+ * We removed the functionality because WordPress own function is_active_sidebar() is
  * stable.
  *
  * @since 0.9.6
@@ -41,8 +41,8 @@ function is_sidebar_active( $index ){
 
 
 /**
- * Switch adding the comment-reply script 
- * 
+ * Switch adding the comment-reply script
+ *
  * Removed in favor of hooking into wp_enqueue_scripts over calling directly in header.php
  * Note that in 1.0 the comment reply script is still enqueued by default.
  * Use wp_dequeue_script('comment-reply') to remove the script instead of using the filter: thematic_show_commentreply.
@@ -55,7 +55,7 @@ function thematic_show_commentreply() {
     $display = apply_filters('thematic_show_commentreply', $display);
     if ($display) {
         if ( is_singular() ) {
-            wp_enqueue_script('comment-reply'); 
+            wp_enqueue_script('comment-reply');
 		}
 	}
 }
@@ -95,9 +95,9 @@ if ( function_exists( 'childtheme_override_comment_class' ) )  {
 } else {
 	/**
 	 * Generates semantic classes for each comment LI element
-	 * 
+	 *
 	 * Removed due to duplication of the core WordPress comment_class()
-	 * 
+	 *
  	 * @deprecated 1.0
 	 */
 	function thematic_comment_class( $print = true ) {
@@ -143,8 +143,8 @@ if ( function_exists( 'childtheme_override_comment_class' ) )  {
 }
 
 /**
- * Generates the Thematic "Read more" text for excerpts 
- * 
+ * Generates the Thematic "Read more" text for excerpts
+ *
  * Removed for namespacing
  *
  * @deprecated 1.0
@@ -156,7 +156,7 @@ function more_text() {
 
 /**
  * Filter: list_comments_arg
- * 
+ *
  * Removed for namespacing
  *
  * @deprecated 1.0
@@ -168,7 +168,7 @@ function list_comments_arg() {
 
 /**
  * Create the arguments for wp_list_bookmarks in links.php
- * 
+ *
  * Removed for namespacing
  *
  * @deprecated 1.0
@@ -181,7 +181,7 @@ function list_bookmarks_args() {
 
 /**
  * Register action hook: widget_area_primary_aside
- * 
+ *
  * Removed for namespacing
  *
  * @deprecated 1.0
@@ -193,7 +193,7 @@ function widget_area_primary_aside() {
 
 
 /**
- * Register action hook: widget_area_secondary_aside 
+ * Register action hook: widget_area_secondary_aside
  *
  * Removed for namespacing
  *
@@ -232,12 +232,12 @@ function widget_area_index_insert() {
 
 
 /**
- * Register action hook: widget_area_index_bottom 
+ * Register action hook: widget_area_index_bottom
  *
  * Removed for namespacing
  *
  * @deprecated 1.0
- */	
+ */
 function widget_area_index_bottom() {
 	_deprecated_function( __FUNCTION__, '1.0', 'thematic_widget_area_index_bottom()' );
     thematic_widget_area_index_bottom();
@@ -245,7 +245,7 @@ function widget_area_index_bottom() {
 
 
 /**
- * Register action hook: widget_area_single_top 
+ * Register action hook: widget_area_single_top
  *
  * Removed for namespacing
  *
@@ -258,7 +258,7 @@ function widget_area_single_top() {
 
 
 /**
- * Register action hook: widget_area_single_insert 
+ * Register action hook: widget_area_single_insert
  *
  * Removed for namespacing
  *
@@ -271,7 +271,7 @@ function widget_area_single_insert() {
 
 
 /**
- * Register action hook: widget_area_single_bottom 
+ * Register action hook: widget_area_single_bottom
  *
  * Removed for namespacing
  *
@@ -284,24 +284,24 @@ function widget_area_single_bottom() {
 
 
 /**
- * Register action hook: widget_area_page_top 
+ * Register action hook: widget_area_page_top
  *
  * Removed for namespacing
  *
- * @deprecated 1.0	 
+ * @deprecated 1.0
  */
 function widget_area_page_top() {
 	_deprecated_function( __FUNCTION__, '1.0', 'thematic_widget_area_page_top()' );
 	thematic_widget_area_page_top();
 }
-	
-	
+
+
 /**
- * Register action hook: widget_area_page_bottom 
+ * Register action hook: widget_area_page_bottom
  *
  * Removed for namespacing
  *
- * @deprecated 1.0	 
+ * @deprecated 1.0
  */
 function widget_area_page_bottom() {
 	_deprecated_function( __FUNCTION__, '1.0', 'thematic_widget_page_bottom()' );
@@ -311,7 +311,7 @@ function widget_area_page_bottom() {
 
 /**
  * Register action hook: widget_area_subsidiaries
- * 
+ *
  * Removed for namespacing
  *
  * @deprecated 1.0
@@ -330,95 +330,95 @@ function widget_area_page_bottom() {
  * @deprecated 1.0.2.3
  */
 
-function thematic_legacy_comment_form(){ 
+function thematic_legacy_comment_form(){
 
-	_deprecated_function( __FUNCTION__, '1.0.2.3', 'comment_form( thematic_comment_form_args() )' ); 
+	_deprecated_function( __FUNCTION__, '1.0.2.3', 'comment_form( thematic_comment_form_args() )' );
 
 	$user = wp_get_current_user();
 
 	$user_ID =  ! ( is_wp_error( $user ) ) ? $user->ID : FALSE; ?>
-			
+
 	<div id="respond">
-	
+
  		<h3><?php comment_form_title( thematic_postcomment_text(), thematic_postreply_text() ); ?></h3>
  		<div id="cancel-comment-reply"><?php cancel_comment_reply_link() ?></div>
-		
+
 		<?php if ( get_option( 'comment_registration' ) && !$user_ID ) : ?>
-		
+
 			<p id="login-req"><?php printf( __('You must be %1$slogged in%2$s to post a comment.', 'thematic'), sprintf('<a href="%s" title ="%s">', wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ), esc_attr__( 'Log in', 'thematic' ) ), '</a>' ) ?></p>
-			
+
 		<?php else : ?>
-		
-			<div class="formcontainer">	
+
+			<div class="formcontainer">
 				<?php
 				// action hook for inserting content above #commentform
-				thematic_abovecommentsform() 
-				?>					
-	
+				thematic_abovecommentsform()
+				?>
+
 				<form id="commentform" action="<?php echo site_url( '/wp-comments-post.php' ) ?>" method="post">
-				
+
 				<?php if ( $user_ID ) : ?>
 					<p id="login"><span class="loggedin"><?php _e('Logged in as', 'thematic' ) . printf( ' <a href="%1$s" title="%2$s">%3$s</a>', admin_url( 'profile.php' ), sprintf( esc_attr__('Logged in as %s', 'thematic'), $user_identity ) , $user_identity ) ;?></span> <span class="logout"><?php printf('<a href="%s" title="%s">%s</a>' , esc_attr( wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ), esc_attr__('Log out of this account', 'thematic' ) , __('Log out?', 'thematic' ) ); ?></span>
 					</p>
-	
+
 				<?php else : ?>
 
 					<p id="comment-notes"><?php printf( _x( 'Your email is %1$snever%2$s published nor shared.' , '%$1s and %$2s are <em> tags for emphasis on never', 'thematic' ), '<em>' , '</em>' ) ?></p>
-	
+
                     <div id="form-section-author" class="form-section">
 						<div class="form-label"><label for="author"><?php _e( 'Name', 'thematic' ) ?></label> <?php if ( $req ) { _e( '<span class="required">*</span>', 'thematic' ); } ?></div>
 						<div class="form-input"><input id="author" name="author" type="text" value="<?php echo $comment_author ?>" size="30" maxlength="20" tabindex="3" /></div>
                     </div><!-- #form-section-author .form-section -->
-	
+
                     <div id="form-section-email" class="form-section">
 						<div class="form-label"><label for="email"><?php _e( 'Email', 'thematic' ) ?></label> <?php if ( $req ) { _e( '<span class="required">*</span>', 'thematic' ); } ?></div>
 						<div class="form-input"><input id="email" name="email" type="text" value="<?php echo $comment_author_email ?>" size="30" maxlength="50" tabindex="4" /></div>
                     </div><!-- #form-section-email .form-section -->
-	
+
                     <div id="form-section-url" class="form-section">
 						<div class="form-label"><label for="url"><?php _e( 'Website', 'thematic' ) ?></label></div>
 						<div class="form-input"><input id="url" name="url" type="text" value="<?php echo $comment_author_url ?>" size="30" maxlength="50" tabindex="5" /></div>
 	                </div><!-- #form-section-url .form-section -->
-	
+
 				<?php endif /* if ( $user_ID ) */ ?>
-	
+
 	            <div id="form-section-comment" class="form-section">
 					<div class="form-label"><label for="comment"><?php _e( thematic_commentbox_text(), 'thematic' ) ?></label></div>
 	    			<div class="form-textarea"><textarea id="comment" name="comment" cols="45" rows="8" tabindex="6"></textarea></div>
 	            </div><!-- #form-section-comment .form-section -->
-	                            
+
                 <div id="form-allowed-tags" class="form-section">
                     <p><span><?php printf( _x('You may use these %1$sHTML%2$s tags and attributes', '%$1s and %$2s are <abbr> tags', 'thematic'), '<abbr title="HyperText Markup Language">', '</abbr>' ) ?></span> <code><?php echo allowed_tags(); ?></code></p>
                 </div>
-								
+
        			<?php do_action( 'comment_form', $post->ID ); ?>
-	                  
+
 				<div class="form-submit"><input id="submit" name="submit" type="submit" value="<?php echo thematic_commentbutton_text(); ?>" tabindex="7" /><input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" /></div>
-	
-                <?php comment_id_fields(); ?>    
-	
+
+                <?php comment_id_fields(); ?>
+
 			</form><!-- #commentform -->
-	
+
 			<?php
 			// action hook for inserting content below #commentform
 			thematic_belowcommentsform()
 			?>
-	
+
 		</div><!-- .formcontainer -->
 		<?php endif /* if ( get_option('comment_registration') && !$user_ID ) */ ?>
-		
+
 	</div><!-- #respond -->
-	
+
 <?php
 }
 
 
 /**
  * Legacy feed links handling
- * 
- * If you add theme support for thematic_legacy_feedlinks, thematic_show_rss() 
+ *
+ * If you add theme support for thematic_legacy_feedlinks, thematic_show_rss()
  * and thematic_show_commentsrss() are used instead of add_theme_support( 'automatic-feed-links' )
- * 
+ *
  * @deprecated 1.0.3
  */
 if ( defined( 'THEMATIC_COMPATIBLE_FEEDLINKS' ) ) { add_theme_support( 'thematic_legacy_feedlinks' ); }
@@ -426,10 +426,10 @@ if ( defined( 'THEMATIC_COMPATIBLE_FEEDLINKS' ) ) { add_theme_support( 'thematic
 
 /**
  * Legacy comments handling for pages, archives and links
- * 
- * If you add_theme_support for thematic_legacy_comment_handling, Thematic 
+ *
+ * If you add_theme_support for thematic_legacy_comment_handling, Thematic
  * will only show comments on pages with a key/value of "comments"
- * 
+ *
  * @deprecated 1.0.3
  */
 if ( defined( 'THEMATIC_COMPATIBLE_COMMENT_HANDLING' ) ) { add_theme_support( 'thematic_legacy_comment_handling' ); }
@@ -437,10 +437,10 @@ if ( defined( 'THEMATIC_COMPATIBLE_COMMENT_HANDLING' ) ) { add_theme_support( 't
 
 /**
  * Legacy body class handling
- * 
- * If you add theme support for `thematic_legacy_body_class`, Thematic 
+ *
+ * If you add theme support for `thematic_legacy_body_class`, Thematic
  * will add the classes in thematic_legacy_body_class() to the body classes
- * 
+ *
  * @deprecated 1.0.3
  */
 if ( defined( 'THEMATIC_COMPATIBLE_BODY_CLASS' ) ) { add_theme_support( 'thematic_legacy_body_class' ); }
@@ -448,10 +448,10 @@ if ( defined( 'THEMATIC_COMPATIBLE_BODY_CLASS' ) ) { add_theme_support( 'themati
 
 /**
  * Legacy post class handling
- * 
- * If you add theme support for `thematic_legacy_post_class`, Thematic 
+ *
+ * If you add theme support for `thematic_legacy_post_class`, Thematic
  * will add the classes in thematic_post_class() to the post classes
- * 
+ *
  * @deprecated 1.0.3
  */
 if ( defined( 'THEMATIC_COMPATIBLE_POST_CLASS' ) ) { add_theme_support( 'thematic_legacy_post_class' ); }
@@ -459,10 +459,10 @@ if ( defined( 'THEMATIC_COMPATIBLE_POST_CLASS' ) ) { add_theme_support( 'themati
 
 /**
  * Legacy comment form handling
- * 
- * If you add theme support for thematic_legacy_comment_form, Thematic 
+ *
+ * If you add theme support for thematic_legacy_comment_form, Thematic
  * will use the old comment form markup.
- * 
+ *
  * @deprecated 1.0.3
  */
 if ( defined( 'THEMATIC_COMPATIBLE_COMMENT_FORM' ) ) { add_theme_support( 'thematic_legacy_comment_form' ); }
@@ -477,14 +477,14 @@ if ( defined( 'THEMATIC_COMPATIBLE_COMMENT_FORM' ) ) { add_theme_support( 'thema
  */
 
 function thematic_bodyopen() {
-	_deprecated_function( __FUNCTION__, '1.0.3.3', 'thematic_body()' ); 
+	_deprecated_function( __FUNCTION__, '1.0.3.3', 'thematic_body()' );
 }
 
 /**
  * Added a settings section to display legacy help text and theme links WP 3.2 compatible
  *
  * @removed in favor of adding contextual help via get_current_screen()
- * 
+ *
  * @deprecated 1.0.4
  */
 function thematic_legacy_help() {
@@ -494,21 +494,21 @@ function thematic_legacy_help() {
 
 /**
  * Rendered the legacy help text and theme links WP 3.2 compatible
- * 
+ *
  * @removed in favor of adding contextual help via get_current_screen()
- * 
+ *
  * @deprecated 1.0.4
  */
-function thematic_do_legacy_help_section() { 
+function thematic_do_legacy_help_section() {
 	_deprecated_function( __FUNCTION__, '1.0.4', 'thematic_opt_page_help' );
 }
 
 
 /**
  * Displays the HEAD profile
- * 
+ *
  * Filter: thematic_head_profile
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_head_profile() {
@@ -522,16 +522,16 @@ function thematic_head_profile() {
 
 /**
  * Displays the xhtml1.0 DOCTYPE
- * 
+ *
  * Filter: thematic_create_doctype
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_create_doctype() {
 	if ( !current_theme_supports( 'thematic_legacy_quiet' ) ) {
 		_deprecated_function( __FUNCTION__, '2.0.0', 'childtheme_override_doctype' );
 	}
-   
+
    	$content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
     $content .= '<html xmlns="http://www.w3.org/1999/xhtml"';
     echo apply_filters( 'thematic_create_doctype', $content );
@@ -540,16 +540,16 @@ function thematic_create_doctype() {
 
 /**
  * Display the meta content type
- * 
+ *
  * Filter: thematic_create_contenttype
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_create_contenttype() {
 	if ( !current_theme_supports( 'thematic_legacy_quiet' ) ) {
 		_deprecated_function( __FUNCTION__, '2.0.0', 'childtheme_override_meta_charset' );
 	}
-    
+
     $content = '<meta http-equiv="Content-Type" content="' . get_bloginfo('html_type') . '; charset=' . get_bloginfo('charset') . '" />' . "\n";
     echo apply_filters('thematic_create_contenttype', $content);
 }
@@ -558,9 +558,9 @@ function thematic_create_contenttype() {
 /**
  * Switch for displaying the meta-tag description
  * Removed after thematic_show_description switch was merged with thematic_create_description into thematic_meta_description
- * 
+ *
  * Filter: thematic_show_description
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_show_description() {
@@ -571,9 +571,9 @@ function thematic_show_description() {
 
 /**
  * Switch for creating the meta-tag description
- * 
+ *
  * Removed after thematic_show_description switch was merged with thematic_create_description into thematic_meta_description
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_create_description() {
@@ -584,9 +584,9 @@ function thematic_create_description() {
 
 /**
  * Switch creating the robots meta-tag
- * 
+ *
  * Removed after thematic_show_robots switch was merged with thematic_create_robots into thematic_meta_robots
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_show_robots() {
@@ -597,9 +597,9 @@ function thematic_show_robots() {
 
 /**
  * Created the robots meta-tag
- * 
+ *
  * Removed after thematic_show_robots switch was merged with thematic_create_robots into thematic_meta_robots
- * 
+ *
  * @deprecated 2.0.0
  */
 function thematic_create_robots() {
@@ -610,8 +610,8 @@ function thematic_create_robots() {
 
 /**
  * Search widget class
- * 
- * Deprecated since core widgets should not be deregisterd. 
+ *
+ * Deprecated since core widgets should not be deregisterd.
  * Functionality is replaced with a filter in thematic_filter_search_widget()
  *
  * @since 0.9.6.3
@@ -619,9 +619,9 @@ function thematic_create_robots() {
  */
 class Thematic_Widget_Search extends WP_Widget {
 
-	function Thematic_Widget_Search() {
+	function _construct() {
 		$widget_ops = array('classname' => 'widget_search', 'description' => __( 'A search form for your blog', 'thematic') );
-		$this->WP_Widget('search', __('Search', 'thematic'), $widget_ops);
+		parent::__construct('search', __('Search', 'thematic'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
